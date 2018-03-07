@@ -11,5 +11,8 @@ BRA_inflow <- rename(BRA_inflow, Country = X5, '2001' = X7, '2002' = X8, '2003' 
 # Drop unnecessary columns (do not do if regional FDI flows are required)
 BRA_inflow <- subset(BRA_inflow, select = -c(Brazil, X2, X3, X4, X6) )
 
+# Drop rows without a country value (regional data or leftover from formatting)
+BRA_inflow <- filter(BRA_inflow, is.na(Country) == FALSE)
+
 # Output cleaned dataset as CSV
 write.csv(BRA_inflow, '~/FDIcleanR/cleaned_data/BRA_inflow.csv')
